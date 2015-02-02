@@ -1,0 +1,99 @@
+        <article role="article">
+            <h2>Create a new account</h2>
+            <form name="registrationForm" class="form-horizontal">
+                <h3>Choose a username and password</h3>
+                <p>Please enter your email address for your username. It cannot be longer than 56 characters. </p>
+                <div id="login-info">
+                    <div class="form-group">
+                        <label for="username" class="control-label col-xs-2">Username</label>
+                        <div class="col-xs-10">
+                            <input type="email" name="username" id="username" class="form-control" ng-model="account.username" role="textbox" tabindex="1" placeholder="user@domain.com" ng-maxlength="56" ng-required="true" ai-enter="validateForm()" />
+                        </div>
+                    </div>
+                    <div class="alert alert-danger col-xs-offset-2 col-xs-10" ng-show="registrationForm.submitted && registrationForm.username.$invalid">
+                        <ul>
+                            <li ng-show="registrationForm.username.$error.required">{{errors.EMPTY_USERNAME}}</li>
+                            <li ng-show="registrationForm.username.$error.email">{{errors.INVALID_EMAIL}}</li>
+                            <li ng-show="registrationForm.username.$error.maxlength">{{errors.LONG_USERNAME}}</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="control-label col-xs-2">Password</label>
+                        <div class="col-xs-10">
+                            <input type="text" name="password" id="password" class="form-control" ng-model="account.password" role="textbox" tabindex="2" placeholder="6 characters or more" ng-required="true" ng-minlength="6" ng-change="validateSamePasswords()" ai-enter="validateForm()" />
+                        </div>
+                    </div>
+                    <div class="alert alert-danger col-xs-offset-2 col-xs-10" ng-show="registrationForm.submitted && registrationForm.password.$invalid">
+                        <ul>
+                            <li ng-show="registrationForm.password.$error.required">{{errors.EMPTY_PASSWORD}}</li>
+                            <li ng-show="registrationForm.password.$error.diffpassword">{{errors.DIFF_PASSWORD}}</li>
+                            <li ng-show="registrationForm.password.$error.minlength">{{errors.SHORT_PASSWORD}}</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label for="passwordConfirm" class="control-label col-xs-2">Confirm Password</label>
+                        <div class="col-xs-10">
+                            <input type="text" name="passwordConfirm" id="passwordConfirm" class="form-control" ng-model="account.passwordConfirm" role="textbox" tabindex="3" placeholder="Confirm your password" ng-required="true" ng-minlength="6" ng-change="validateSamePasswords()" ai-enter="validateForm()" />
+                        </div>
+                    </div>
+                    <div class="alert alert-danger col-xs-offset-2 col-xs-10" ng-show="registrationForm.submitted && registrationForm.passwordConfirm.$invalid">
+                        <ul>
+                            <li ng-show="registrationForm.passwordConfirm.$error.required">{{errors.EMPTY_PASSWORD}}</li>
+                            <li ng-show="registrationForm.passwordConfirm.$error.diffpassword">{{errors.DIFF_PASSWORD}}</li>
+                            <li ng-show="registrationForm.passwordConfirm.$error.minlength">{{errors.SHORT_PASSWORD}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <h3>Please enter your name and date of birth</h3>
+                <div id="personal-info">
+                    <div class="form-group">
+                        <label for="firstName" class="control-label col-xs-2">First Name</label>
+                        <div class="col-xs-10">
+                            <input type="text" name="firstName" id="firstName" class="form-control" ng-model="account.firstName" role="textbox" tabindex="4" ng-required="true" ng-maxlength="50" ng-pattern="/^[a-zA-Z]+$/" ai-enter="validateForm()" />
+                        </div>
+                    </div>
+                    <div class="alert alert-danger col-xs-offset-2 col-xs-10" ng-show="registrationForm.submitted && registrationForm.firstName.$invalid">
+                        <ul>
+                            <li ng-show="registrationForm.firstName.$error.required">{{errors.EMPTY_FIRSTNAME}}</li>
+                            <li ng-show="registrationForm.firstName.$error.maxlength">{{errors.LONG_NAME}}</li>
+                            <li ng-show="registrationForm.firstName.$error.pattern">{{errors.INVALID_NAME}}</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName" class="control-label col-xs-2">Last Name</label>
+                        <div class="col-xs-10">
+                            <input type="text" name="lastName" id="lastName" class="form-control" ng-model="account.lastName" role="textbox" tabindex="5" ng-maxlength="50" ng-pattern="/^[a-zA-Z]*$/" ai-enter="validateForm()" />
+                        </div>
+                    </div>
+                    <div class="alert alert-danger col-xs-offset-2 col-xs-10" ng-show="registrationForm.submitted && registrationForm.lastName.$invalid">
+                        <ul>
+                            <li ng-show="registrationForm.lastName.$error.maxlength">{{errors.LONG_NAME}}</li>
+                            <li ng-show="registrationForm.lastName.$error.pattern">{{errors.INVALID_NAME}}</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-2">Date of Birth</label>
+                        <div class="col-xs-10">
+                            <p class="input-group">
+                                <input type="text" name="dateOfBirth" id="dateOfBirth" class="form-control" datepicker-popup="MM/dd/yyyy" datepicker-options="dateOptions" ng-model="account.dateOfBirth" is-open="opened" min-date="minDate" max-date="maxDate" ng-required="true" close-text="Close" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="openCalendar($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="alert alert-danger col-xs-offset-2 col-xs-10" ng-show="registrationForm.submitted && registrationForm.dateOfBirth.$invalid">
+                        <ul>
+                            <li ng-show="registrationForm.dateOfBirth.$error.required">{{errors.INVALID_DATE}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <br />
+                <div id="controls" class="form-group">
+                    <div class="col-xs-offset-2 col-xs-10">
+                        <button type="button" name="submitBtn" id="submitBtn" class="btn btn-primary btn-lg" role="button" value="Submit" ng-click="validateForm()">Submit</button>
+                        <button type="button" name="clearBtn" id="clearBtn" class="btn btn-warning btn-lg" role="button" value="Clear Form" ng-click="clearForm()">Clear Form</button>
+                    </div>
+                </div>
+            </form>
+        </article>

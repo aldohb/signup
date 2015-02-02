@@ -1,0 +1,48 @@
+<article role="article" class="jumbotron-narrow">
+    <h2>Welcome, {{account.firstName}}!</h2>
+    <h3>You have successfully created a new account.</h3>
+    <hr />
+    <div>
+        <h4>This is your profile info</h4>
+        <dl class="dl-horizontal">
+            <dt>Username</dt>
+            <dd>{{account.username}}</dd>
+            <dt>Password</dt>
+            <dd>*********</dd>
+            <dt>First Name</dt>
+            <dd>{{account.firstName}}</dd>
+            <dt>Last Name</dt>
+            <dd>{{account.lastName}}</dd>
+            <dt>Date Of Birth</dt>
+            <dd>{{account.dateOfBirth}}</dd> <!-- Displaying as ISO 8601 to show that the date is actuall submitted that way -->
+            <dt ng-show="postRegForm.submitted">Bio</dt>
+            <dd ng-show="postRegForm.submitted">{{account.bio}}</dd>
+            <dt ng-show="postRegForm.submitted">Your Interests</dt>
+            <dd ng-show="postRegForm.submitted">{{account.interests}}</dd>
+        </dl>
+    </div>
+    <hr />
+    <h4>You may also enter the following optional information:</h4>
+    <form name="postRegForm" class="form-horizontal">
+        <div id="more-info">
+            <div class="form-group">
+                <label for="bio" class="control-label col-xs-2">Enter a short bio:</label>
+                <div class="col-xs-10">
+                    <textarea name="bio" id="bio" ng-model="account.bio" role="textbox" aria-multiline="true" tabindex="1" cols="40"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="interests" class="control-label col-xs-2">What are your interests?</label>
+                <div class="col-xs-10">
+                    <textarea name="interests" id="interests" ng-model="account.interests" role="textbox" aria-multiline="true" tabindex="2" cols="40"></textarea>
+                </div>
+            </div>
+            <div id="controls" class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <button type="button" role="button" name="saveBtn" id="saveBtn" class="btn btn-primary btn-lg" value="Save bio" ng-click="saveBio()">Save bio</button>
+                    <button type="button" role="button" name="clearBtn" id="clearBtn" class="btn btn-warning btn-lg" value="Clear bio and interests" ng-click="clearForm()">Clear</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</article>
